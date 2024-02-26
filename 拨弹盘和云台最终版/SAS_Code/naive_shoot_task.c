@@ -56,7 +56,7 @@
 #define M2006_MOTOR_SPEED_PID_KI 0.0f   //不要这个积分项，否则连续发射停止后还会转
 #define M2006_MOTOR_SPEED_PID_KD 0.0f
 
-#define MAX_MOTOR_CAN_CURRENT 1000000.0f
+#define MAX_MOTOR_CAN_CURRENT 30000.0f
 #define M3505_MOTOR_SPEED_PID_MAX_OUT MAX_MOTOR_CAN_CURRENT
 #define M3505_MOTOR_SPEED_PID_MAX_IOUT 2000.0f
 //70000
@@ -128,6 +128,7 @@ const static RC_ctrl_t *rc_p;
 static const enum RobotState_e *robotMode;   //机器人模式
 static const toSTM32_t *nuc_p;  //NUC数据位置。未来制造全自动机器人时需要
 
+static int is_auto=0;
 static int highspeedshoot=0;
 static int16_t giveShootCurrent[2];
 int16_t giveTriggerCurrent;
@@ -175,19 +176,19 @@ static void initTriggerECDRoundsMonitor()  //初始化拨弹轮圈数监控
     triggerCtrl.initECD=*(triggerCtrl.ECDPoint);
 }   
 
-//暂未添加NUC控制发射
+//添加NUC控制发射
 static void getInstructionAndBuff(void)
 {
     static uint32_t pressTime=0;
     static uint8_t up=0,down=0;
     zeroCurrentMark=0;
 
-    if(robotIsAuto())
+    if(rc_p->mouse.press_r||rc_p->rc.ch[4]>500)
     {
         #ifdef TEAMER_ALLOW_SHOOT
         if(nuc_p->nucSayWeShouldShootNow && rc_p->mouse.press_r)    // 按下右键，操作手允许NUC控制发射。
-        #else
-//        if(nuc_p->nucSayWeShouldShootNow)
+        #else                                     
+        if(nuc_p->is_fire)
         #endif
             insBuff.shootOne=1;
     }
@@ -487,11 +488,15 @@ static void setSpeedByMode(void)
         wantedVTriggerMotor=0;
 }
 
-static void calcGiveCurrent(void)
+static void calcGiveCurrent1(void)
 {
     int i;
     for(i=0;i<2;i++)
+	{
         PID_calc(&shootMotorPIDs[i],presentVShootMotor[i],-wantedVShootMotor[i]);
+//				usart_printf("%d:%d ",i,shootMotorPIDs[i].out);
+	}
+//	usart_printf("\n");
     for(i=0;i<2;i++)
         giveShootCurrent[i]=shootMotorPIDs[i].out;
     PID_calc(&triggerMotorPID,presentVTriggerMotor,wantedVTriggerMotor);
@@ -505,6 +510,7 @@ static void getShootMotorSpeed(void)
     {
         presentVShootMotor[i]=get_shoot_motor_measure_point(i)->speed_rpm*SHOOT_M3508_MOTOR_RPM_TO_VECTOR;
     }
+
     presentVTriggerMotor=get_trigger_motor_measure_point()->speed_rpm*SHOOT_M2006_MOTOR_RPM_TO_VECTOR;
 }
 
@@ -520,6 +526,14 @@ void shoot_task(void const *pvParameters)
     // triggerMonitorSubOn=1;
     while(1)
     {
+				if(rc_p->mouse.press_r||rc_p->rc.ch[4]>500)
+				{
+					is_auto=1;
+				}
+				else
+				{
+					is_auto=0;
+				}
         getInstructionAndBuff();    //获取指令并缓冲
         fricModeChange();           //摩擦轮状态改变
         //若摩擦轮关闭状态，则清除单发和连发指令
@@ -529,7 +543,7 @@ void shoot_task(void const *pvParameters)
 
         // monitorTriggerECDRound();        //监控拨弹轮ECD圈数
         getShootMotorSpeed();
-        calcGiveCurrent();                   //计算PID
+        calcGiveCurrent1();                   //计算PID
                                     //发送控制电流
         #ifdef ZERO_CURRENT_SAFE
         zeroCurrentMark=1;
@@ -543,7 +557,7 @@ void shoot_task(void const *pvParameters)
         else
             CAN_cmd_shoot(giveShootCurrent[0], giveShootCurrent[1]);
         
-        
+        //usart_printf("%f,%f,%f,%f,%d,%d\r\n",presentVShootMotor[0],presentVShootMotor[1],-wantedVShootMotor[0],-wantedVShootMotor[1],giveShootCurrent[0], giveShootCurrent[1]);
         osDelay(SHOOT_CTRL_TIME);
     }
 }

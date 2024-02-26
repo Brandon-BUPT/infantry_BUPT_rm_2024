@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bsp_buzzer.h"
+#include "usb_task.h"
 
 extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_rx;
@@ -64,28 +65,32 @@ const toSTM32_t *get_nuc_control_point(void)
 {
     return &GimbalRxMsg;
 }
-
-void Encode(uint8_t RawData[33], enum Robot_ID self_id, enum Robot_Colors self_color, fp32 pos_x, fp32 pos_y, fp32 gimbal_yaw, fp32 gimbal_pitch, fp32 ballet_speed, enum Auto_Num is_auto)
+//先发指令1，再发指令2
+void Encode(uint8_t* RawData, fp64 gimbal_yaw, fp64 gimbal_pitch , fp64 gimbal_roll, enum Robot_Colors self_color, enum Robot_ID self_id,  enum Auto_Num auto_num,enum Attack_mode attack_mode)
 {
     RawData[0] = 0xE7;
     RawData[1] = 0x7E;
 
-    int32_t id = (int32_t) self_id;
-    int32_t color = (int32_t) self_color;
-	  uint8_t is_A=(uint8_t)is_auto;
-    memcpy(&RawData[2], &id, sizeof(int32_t));
-    memcpy(&RawData[6], &color, sizeof(int32_t));
-
-    memcpy(&RawData[10], &pos_x, sizeof(fp32));
-    memcpy(&RawData[14], &pos_y, sizeof(fp32));
-    memcpy(&RawData[18], &gimbal_yaw, sizeof(fp32));
-    memcpy(&RawData[22], &gimbal_pitch, sizeof(fp32));
-    memcpy(&RawData[26], &ballet_speed, sizeof(fp32));
-    
-	  memcpy(&RawData[30],&is_auto ,sizeof(uint8_t));
+	  //发送任务码 1：云台数据
+		RawData[2]=0x01;
+		memcpy(&RawData[3], &gimbal_yaw, sizeof(fp64));
+    memcpy(&RawData[11], &gimbal_pitch, sizeof(fp64));
+	  memcpy(&RawData[19], &gimbal_roll, sizeof(fp64));
 	
-    RawData[31] = 0x00;
-    RawData[32] = 0xEE;
+	  //发送任务码 2：机器人相关数据
+		RawData[27] = 0xE7;
+	  RawData[28] = 0x7E;
+		RawData[29]=0x02;
+    uint8_t id = (uint8_t) self_id;
+    uint8_t color = (uint8_t) self_color;
+	  uint8_t A_num =(uint8_t)auto_num;
+	  uint8_t A_mode = (uint8_t)attack_mode;
+	  memcpy(&RawData[30],&color,sizeof(uint8_t));
+		memcpy(&RawData[31],&id,sizeof(uint8_t));
+    memcpy(&RawData[32],&A_num, sizeof(uint8_t));
+	
+    memcpy(&RawData[33],&A_mode, sizeof(uint8_t));
+	
 }
 
 
@@ -130,10 +135,10 @@ void USART1_IRQHandler(void)
 
             if (this_time_rx_len == NUCINFO_FRAME_LENGTH)
             {
-                if(buzzer_time++<3)
-									buzzer_on(1,300);
-								else
-									buzzer_off();
+//                if(buzzer_time++<3)
+//									buzzer_on(1,300);
+//								else
+//									buzzer_off();
 								
                 sbus_to_nucCtrl(nucinfo_rx_buf[0], &GimbalRxMsg);
                 //usart_printf("%d,%d,%d,%f,%f,%f,%f\r\n",GimbalRxMsg.is_fire,GimbalRxMsg.is_spin,GimbalRxMsg.recognized,GimbalRxMsg.yaw.data,GimbalRxMsg.pitch.data,GimbalRxMsg.velocity_x.data,GimbalRxMsg.velocity_y.data);
@@ -167,10 +172,10 @@ void USART1_IRQHandler(void)
                 // 处理nuc传来的数
 							//早期处理，通过闪灯检测是否
                 //__HAL_TIM_SetCompare(&htim5, TIM_CHANNEL_1, 0x00000000);
-								if(buzzer_time++<3)
-										buzzer_on(1,300);
-								else
-									buzzer_off();
+//								if(buzzer_time++<3)
+//										buzzer_on(1,300);
+//								else
+//									buzzer_off();
                 sbus_to_nucCtrl(nucinfo_rx_buf[1], &GimbalRxMsg);
                 //usart_printf("%d,%d,%d,%f,%f,%f,%f\r\n",GimbalRxMsg.is_fire,GimbalRxMsg.is_spin,GimbalRxMsg.recognized,GimbalRxMsg.yaw.data,GimbalRxMsg.pitch.data,GimbalRxMsg.velocity_x.data,GimbalRxMsg.velocity_y.data);
             }
@@ -186,37 +191,15 @@ void USART1_IRQHandler(void)
  */
 
 // 数据解析，从线性的传递过来。是否为正确的？方向是否会反过来??
-
+//23个字节
 static void sbus_to_nucCtrl(volatile const uint8_t *sbus_buf, toSTM32_t *nuc_ctrl)
 {
-    if (sbus_buf[0] == SOF1 && sbus_buf[1] == SOF2&&sbus_buf[19]==0x00&&sbus_buf[20]==0xEE)
+    if (sbus_buf[0] == SOF1 && sbus_buf[1] == SOF2)
     {
-        nuc_ctrl->yaw.bytes[0] = sbus_buf[3];
-        nuc_ctrl->yaw.bytes[1] = sbus_buf[4];
-        nuc_ctrl->yaw.bytes[2] = sbus_buf[5];
-        nuc_ctrl->yaw.bytes[3] = sbus_buf[6];
-
-        nuc_ctrl->pitch.bytes[0] = sbus_buf[7];
-        nuc_ctrl->pitch.bytes[1] = sbus_buf[8];
-        nuc_ctrl->pitch.bytes[2] = sbus_buf[9];
-        nuc_ctrl->pitch.bytes[3] = sbus_buf[10];
-
-        // Ctrl CMD decode
-        nuc_ctrl->is_spin = (sbus_buf[2] & 0x01) != 0;
-        nuc_ctrl->is_fire= (sbus_buf[2] & 0x02) != 0;
-        nuc_ctrl->recognized = (sbus_buf[2] & 0x04) != 0;
-
-        nuc_ctrl->velocity_x.bytes[0] = sbus_buf[11];
-        nuc_ctrl->velocity_x.bytes[1] = sbus_buf[12];
-        nuc_ctrl->velocity_x.bytes[2] = sbus_buf[13];
-        nuc_ctrl->velocity_x.bytes[3] = sbus_buf[14];
-
-        nuc_ctrl->velocity_y.bytes[0] = sbus_buf[15];
-        nuc_ctrl->velocity_y.bytes[1] = sbus_buf[16];
-        nuc_ctrl->velocity_y.bytes[2] = sbus_buf[17];
-        nuc_ctrl->velocity_y.bytes[3] = sbus_buf[18];
-				
-				
+				memcpy(&(nuc_ctrl->yaw),(const void*)&sbus_buf[2],8);
+        memcpy(&(nuc_ctrl->pitch),(const void*)&sbus_buf[10],8);
+        memcpy(&(nuc_ctrl->is_fire),(const void*)&sbus_buf[18],1);
+			  memcpy(&(nuc_ctrl->confidence),(const void*)&sbus_buf[19],4);
     }
 }
 

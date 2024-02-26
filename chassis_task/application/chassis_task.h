@@ -73,7 +73,7 @@
 
 //chassis task control time  2ms
 //底盘任务控制间隔 2ms
-#define CHASSIS_CONTROL_TIME_MS 5
+#define CHASSIS_CONTROL_TIME_MS 6
 
 //chassis task control time 0.002s
 //底盘任务控制间隔 0.002s

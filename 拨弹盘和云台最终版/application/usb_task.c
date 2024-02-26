@@ -30,7 +30,7 @@
 #include "naive_gimbal_task.h"
 #include "struct_typedef.h"
 
-static void usb_printf(const char *fmt,...);
+
 
 static uint8_t usb_buf[256];
 static const char status[2][7] = {"OK", "ERROR!"};
@@ -41,14 +41,13 @@ const error_t *error_list_usb_local;
 void usb_task(void const * argument)
 {
     MX_USB_DEVICE_Init();
-    error_list_usb_local = get_error_list_point();
 
 
     while(1)
     {
         osDelay(100);
-
-
+			usb_printf("hello\r\n");
+//			usart_printf("ok\r\n");
 
 //         usb_printf(
 // "******************************\r\n\
@@ -84,7 +83,7 @@ void usb_task(void const * argument)
 
 }
 
-static void usb_printf(const char *fmt,...)
+void usb_printf(const char *fmt,...)
 {
     static va_list ap;
     uint16_t len = 0;

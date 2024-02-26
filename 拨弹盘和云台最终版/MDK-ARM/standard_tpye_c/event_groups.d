@@ -1,8 +1,8 @@
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-standard_tpye_c\event_groups.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdlib.h
+standard_tpye_c\event_groups.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdlib.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\event_groups.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\event_groups.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\event_groups.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\event_groups.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\event_groups.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

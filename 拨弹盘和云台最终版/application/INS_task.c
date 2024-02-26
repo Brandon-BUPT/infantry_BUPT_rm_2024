@@ -269,7 +269,7 @@ void INS_task(void const *pvParameters)
         AHRS_update(INS_quat, timing_time, INS_gyro, accel_fliter_3, INS_mag);
         get_angle(INS_quat, INS_angle + INS_YAW_ADDRESS_OFFSET, INS_angle + INS_PITCH_ADDRESS_OFFSET, INS_angle + INS_ROLL_ADDRESS_OFFSET);
         nowTime=HAL_GetTick();
-				INS_angle[0]-=a*nowTime/2.4999+b;
+				INS_angle[0]+=a*nowTime*2.5+b;
 				//INS_angle[0]-=a*nowTime+b;
 				
         //because no use ist8310 and save time, no use

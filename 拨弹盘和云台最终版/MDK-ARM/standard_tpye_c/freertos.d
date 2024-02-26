@@ -1,7 +1,7 @@
 standard_tpye_c\freertos.o: ../Src/freertos.c
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\freertos.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\freertos.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\freertos.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\freertos.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\freertos.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -58,17 +58,22 @@ standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/t
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-standard_tpye_c\freertos.o: ..\application\calibrate_task.h
-standard_tpye_c\freertos.o: ..\application\struct_typedef.h
-standard_tpye_c\freertos.o: ..\SAS_Code\chassis_task.h
-standard_tpye_c\freertos.o: ..\application\detect_task.h
-standard_tpye_c\freertos.o: ..\SAS_Code\naive_gimbal_task.h
-standard_tpye_c\freertos.o: ..\application\INS_task.h
-standard_tpye_c\freertos.o: ..\application\led_flow_task.h
-standard_tpye_c\freertos.o: ..\application\oled_task.h
-standard_tpye_c\freertos.o: ..\application\referee_usart_task.h
-standard_tpye_c\freertos.o: ..\application\usb_task.h
-standard_tpye_c\freertos.o: ..\application\voltage_task.h
-standard_tpye_c\freertos.o: ..\application\servo_task.h
-standard_tpye_c\freertos.o: ..\SAS_Code\robot_total_mode.h
-standard_tpye_c\freertos.o: ..\SAS_Code\naive_shoot_task.h
+standard_tpye_c\freertos.o: ../application/calibrate_task.h
+standard_tpye_c\freertos.o: ../application/struct_typedef.h
+standard_tpye_c\freertos.o: ../SAS_Code/chassis_task.h
+standard_tpye_c\freertos.o: ../SAS_Code/CAN_receive.h
+standard_tpye_c\freertos.o: ../components/controller/pid.h
+standard_tpye_c\freertos.o: ../application/remote_control.h
+standard_tpye_c\freertos.o: ../bsp/boards/bsp_rc.h
+standard_tpye_c\freertos.o: ../components/algorithm/user_lib.h
+standard_tpye_c\freertos.o: ../application/detect_task.h
+standard_tpye_c\freertos.o: ../SAS_Code/naive_gimbal_task.h
+standard_tpye_c\freertos.o: ../application/INS_task.h
+standard_tpye_c\freertos.o: ../application/led_flow_task.h
+standard_tpye_c\freertos.o: ../application/oled_task.h
+standard_tpye_c\freertos.o: ../application/referee_usart_task.h
+standard_tpye_c\freertos.o: ../application/usb_task.h
+standard_tpye_c\freertos.o: ../application/voltage_task.h
+standard_tpye_c\freertos.o: ../application/servo_task.h
+standard_tpye_c\freertos.o: ../SAS_Code/robot_total_mode.h
+standard_tpye_c\freertos.o: ../SAS_Code/naive_shoot_task.h

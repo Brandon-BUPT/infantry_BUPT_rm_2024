@@ -2,7 +2,7 @@
 #define CAN_MOTOR_H
 #include "struct_typedef.h"
 
-#define CHASSIS_CAN hcan2
+#define CHASSIS_CAN hcan1
 #define GIMBAL_CAN hcan2
 #define SHOOT_CAN hcan2
 //云台和底盘使用的是不同的中心板，连接了不同的can端口。

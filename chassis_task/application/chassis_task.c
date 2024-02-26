@@ -106,15 +106,15 @@
 //yawï¿½ï¿½ï¿½ï¿½PIDï¿½ï¿½ï¿½Ë²ï¿½
 #define YAW_SPD_KP 1560000.0f
 #define YAW_SPD_KI 0.0f
-#define YAW_SPD_KD 1000.0f
+#define YAW_SPD_KD 0.0f
 
 #define YAW_VOLT_MAX_OUT  30000.0f
 #define YAW_VOLT_MAX_IOUT 2000.0f
 
 // #define YAW_AGL_KP 0.07f
-#define YAW_AGL_KP 0.03f
-#define YAW_AGL_KI 0.0005f
-#define YAW_AGL_KD 0.0f
+#define YAW_AGL_KP 0.05f
+#define YAW_AGL_KI 0.004f
+#define YAW_AGL_KD 0.001f
 
 #define YAW_AGL_SPD_MAX_OUT (50.0f)
 #define YAW_AGL_SPD_MAX_IOUT (11.7f)
@@ -568,6 +568,7 @@ fp32 gimbal_PID_calc(pid_type_def *pid, fp32 ref, fp32 set)
     pid->set = set;
     pid->fdb = ref;
     pid->error[0] = radFormat(set - ref);
+
     if (pid->mode == PID_POSITION)
     {
         pid->Pout = pid->Kp * pid->error[0];
@@ -579,6 +580,7 @@ fp32 gimbal_PID_calc(pid_type_def *pid, fp32 ref, fp32 set)
         range_limit_inside(pid->Iout, pid->max_iout);
         pid->out = pid->Pout + pid->Iout + pid->Dout;
         range_limit_inside(pid->out, pid->max_out);
+			usart_printf("%f,%f,%f,%f,%f\r\n",gimbalYawCtrl.nowAbsoluteAngle,gimbalYawCtrl.wantedAbsoluteAngle,pid->error[0],pid->Iout,pid->out*YAW_SPD_KP);
     }
     else if (pid->mode == PID_DELTA)
     {
@@ -596,6 +598,7 @@ fp32 gimbal_PID_calc(pid_type_def *pid, fp32 ref, fp32 set)
         pid->out += pid->Pout + pid->Iout + pid->Dout;
 				}
     }
+		
     return pid->out;
 }
 struct gimbalMotorCtrl_s c;
@@ -613,7 +616,7 @@ void calcPID(void)
 	      first_order_filter_cali(&(c.spd_filter),(c.spd_pid).out);
         gimbal_yaw_ctrl_point->giveVolt=c.spd_pid.out;     //¸øµçÑ¹
 	//µ÷ÊÔyawÖápid
-	      // usart_printf("%f,%f,%f,%f,%f\r\n",c.nowAbsoluteAngle,c.wantedAbsoluteAngle,c.agl_pid.out,gimbal_yaw_ctrl_point->giveVolt,c.spd_pid.out);
+//	      usart_printf("%f,%f,%f,%f,%f\r\n",c.nowAbsoluteAngle,c.wantedAbsoluteAngle,c.agl_pid.out,gimbal_yaw_ctrl_point->giveVolt,c.spd_pid.out);
 }
 
 //ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
@@ -661,8 +664,8 @@ void chassis_task(void const *pvParameters)
     fp32 power, buffer;
 		get_chassis_power_and_buffer(&power, &buffer);
 		//usart_printf("%f, %f\r\n", power, buffer);
-
-		usart_printf("%f,%f,%f,%f,%d,%d\r\n",driveMotor[0].presentMotorSpeed,driveMotor[0].wantedMotorSpeed,power,buffer,gimbalYawCtrl.nowECD,get_robot_chassis_power_limit());
+		
+		//usart_printf("%f,%f,%f,%f,%d,%d\r\n",driveMotor[0].presentMotorSpeed,driveMotor[0].wantedMotorSpeed,power,buffer,gimbalYawCtrl.nowECD,get_robot_chassis_power_limit());
 		osDelay(CHASSIS_CONTROL_TIME_MS);
 		
 	}

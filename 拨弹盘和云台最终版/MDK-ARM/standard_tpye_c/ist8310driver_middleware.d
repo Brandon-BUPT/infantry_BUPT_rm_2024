@@ -1,6 +1,6 @@
 standard_tpye_c\ist8310driver_middleware.o: ..\components\devices\ist8310driver_middleware.c
 standard_tpye_c\ist8310driver_middleware.o: ..\components\devices\ist8310driver_middleware.h
-standard_tpye_c\ist8310driver_middleware.o: ..\application\struct_typedef.h
+standard_tpye_c\ist8310driver_middleware.o: ../application/struct_typedef.h
 standard_tpye_c\ist8310driver_middleware.o: ../Inc/main.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 standard_tpye_c\ist8310driver_middleware.o: ../Inc/stm32f4xx_hal_conf.h
@@ -9,7 +9,7 @@ standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Include/core_cm4.h
-standard_tpye_c\ist8310driver_middleware.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\ist8310driver_middleware.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Include/cmsis_version.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -17,7 +17,7 @@ standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-standard_tpye_c\ist8310driver_middleware.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\ist8310driver_middleware.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 standard_tpye_c\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
@@ -60,5 +60,5 @@ standard_tpye_c\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/
 standard_tpye_c\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 standard_tpye_c\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-standard_tpye_c\ist8310driver_middleware.o: ..\bsp\boards\bsp_delay.h
-standard_tpye_c\ist8310driver_middleware.o: ..\bsp\boards\bsp_i2c.h
+standard_tpye_c\ist8310driver_middleware.o: ../bsp/boards/bsp_delay.h
+standard_tpye_c\ist8310driver_middleware.o: ../bsp/boards/bsp_i2c.h

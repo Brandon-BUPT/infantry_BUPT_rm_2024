@@ -3,8 +3,8 @@ standard_tpye_c\usb_task.o: ..\application\usb_task.h
 standard_tpye_c\usb_task.o: ..\application\struct_typedef.h
 standard_tpye_c\usb_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\usb_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\usb_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\usb_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\usb_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -62,9 +62,9 @@ standard_tpye_c\usb_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb
 standard_tpye_c\usb_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
 standard_tpye_c\usb_task.o: ../Inc/usbd_conf.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdio.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdlib.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\string.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdio.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdlib.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\usb_task.o: ../Inc/main.h
 standard_tpye_c\usb_task.o: ../Inc/usbd_cdc_if.h
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
@@ -72,7 +72,7 @@ standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
-standard_tpye_c\usb_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdarg.h
+standard_tpye_c\usb_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdarg.h
 standard_tpye_c\usb_task.o: ..\application\detect_task.h
 standard_tpye_c\usb_task.o: ..\application\voltage_task.h
-standard_tpye_c\usb_task.o: ..\SAS_Code\naive_gimbal_task.h
+standard_tpye_c\usb_task.o: ../SAS_Code/naive_gimbal_task.h

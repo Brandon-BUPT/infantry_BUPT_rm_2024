@@ -1,6 +1,6 @@
 standard_tpye_c\nuccommu.o: ..\SAS_Code\NUC_communicate\nucCommu.c
 standard_tpye_c\nuccommu.o: ..\SAS_Code\NUC_communicate\nucCommu.h
-standard_tpye_c\nuccommu.o: ..\application\struct_typedef.h
+standard_tpye_c\nuccommu.o: ../application/struct_typedef.h
 standard_tpye_c\nuccommu.o: ../Inc/main.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 standard_tpye_c\nuccommu.o: ../Inc/stm32f4xx_hal_conf.h
@@ -9,7 +9,7 @@ standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_de
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Include/core_cm4.h
-standard_tpye_c\nuccommu.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\nuccommu.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Include/cmsis_version.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -17,7 +17,7 @@ standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 standard_tpye_c\nuccommu.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-standard_tpye_c\nuccommu.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\nuccommu.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
@@ -47,10 +47,11 @@ standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pc
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 standard_tpye_c\nuccommu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 standard_tpye_c\nuccommu.o: ..\SAS_Code\NUC_communicate\bsp_nucCom.h
-standard_tpye_c\nuccommu.o: ..\application\detect_task.h
-standard_tpye_c\nuccommu.o: ..\components\devices\OLED.h
-standard_tpye_c\nuccommu.o: ..\components\devices\oledfont.h
-standard_tpye_c\nuccommu.o: ..\SAS_Code\robot_total_mode.h
-standard_tpye_c\nuccommu.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdlib.h
-standard_tpye_c\nuccommu.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\string.h
-standard_tpye_c\nuccommu.o: ..\bsp\boards\bsp_buzzer.h
+standard_tpye_c\nuccommu.o: ../application/detect_task.h
+standard_tpye_c\nuccommu.o: ../components/devices/OLED.h
+standard_tpye_c\nuccommu.o: ../components/devices/oledfont.h
+standard_tpye_c\nuccommu.o: ../SAS_Code/robot_total_mode.h
+standard_tpye_c\nuccommu.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdlib.h
+standard_tpye_c\nuccommu.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\string.h
+standard_tpye_c\nuccommu.o: ../bsp/boards/bsp_buzzer.h
+standard_tpye_c\nuccommu.o: ../application/usb_task.h

@@ -15,6 +15,7 @@
 
 #include "cmsis_os.h"
 #include "pid.h"
+#include "bsp_laser.h"
 #include "arm_math.h"
 #include "CAN_receive.h"
 #include "INS_task.h"
@@ -35,7 +36,7 @@
 #include <cmath>
 #include "RobotStructure.h"
 #define GIMBAL_TASK_INIT_TIME 500
-#define GIMBAL_TASK_CTRL_TIME 3
+#define GIMBAL_TASK_CTRL_TIME 4
 
 // TO DO: 测量并记录这些ECD
 
@@ -58,13 +59,13 @@
 
 
 //****************************机器人测试获得值*************//
-#define PITCH_TEST_INIT_ANGLE_MIDDLE_ECD 6559
-#define PITCH_TEST_MAX_ANGLE_ECD 7246
-#define PITCH_TEST_MIN_ANGLE_ECD 5439
+#define PITCH_TEST_INIT_ANGLE_MIDDLE_ECD 4628
+#define PITCH_TEST_MAX_ANGLE_ECD 4228
+#define PITCH_TEST_MIN_ANGLE_ECD 3828
 // #define PITCH_TEST_ANGLE_ECD_LENGTH 1039
 
-#define PITCH_TEST_RAD_MIN (-0.40f)
-#define PITCH_TEST_RAD_MAX  (0.50f)
+#define PITCH_TEST_RAD_MIN (-0.39f)
+#define PITCH_TEST_RAD_MAX  (0.20f)
 
 #define YAW_TEST_INIT_ANGLE_MIDDLE_ECD 3557
 #define YAW_TEST_MAX_ANGLE_ECD 5616
@@ -112,10 +113,10 @@
  */
 
 // 输入角速度 rad/s 、输出电压 int16_t 的PID系数
-#define PITCH_SPD_KP 11000000.0f
+#define PITCH_SPD_KP 10000000.0f
 // #define PITCH_SPD_KP 10000000.0f
 
-#define PITCH_SPD_KI 0.0f
+#define PITCH_SPD_KI 200.0f
 #define PITCH_SPD_KD 0.0f
                             
 #define PITCH_VOLT_MAX_OUT  30000.0f    // prev ent overflow of control control volt
@@ -286,12 +287,12 @@ static int16_t press_x=0;
 
 //控制指针
 static const RC_ctrl_t *rc_p;   //遥控器位置指针，需要初始化
-static const toSTM32_t *nuc_p;  //NUC数据位置。未来制造全自动机器人时需要
+static const toSTM32_t *nuc_p;  //NUC数据位置
 
 // 用于与底盘通信的数据.只用于badyaw模式控制旋转角速度
 static struct GimbalToChassis_s toChassis={0,0};
-static uint8_t GimbalAngleMsg[33];
-static uint8_t is_auto=0;
+static uint8_t GimbalAngleMsg[34];
+static int is_auto=0;
 static void initGimbalCtrls(void)
 {
     uint8_t i;
@@ -508,11 +509,11 @@ void getControlAngles(void)
 			  
 				//pitch轴目标值控制
 				gimbalPitchCtrl.wantedAbsoluteAngle+=20*pitch_channel*PITCH_RC_SEN-20*rc_p->mouse.y*PITCH_MOUSE_SEN;
-				//gimbalPitchCtrl.wantedAbsoluteAngle += adjust_channel(pitch_channel, K_CTRL_PROP_Y, K_CTRL_EXP_Y) * PITCH_RC_SEN - adjust_channel(rc_p->mouse.y, K_CTRL_MOUSE_Y, K_CTRL_EXP_Y) * PITCH_MOUSE_SEN ;
-				if(gimbalPitchCtrl.wantedAbsoluteAngle>=0.4)
-					gimbalPitchCtrl.wantedAbsoluteAngle=0.4;
-				if(gimbalPitchCtrl.wantedAbsoluteAngle<=-0.4)
-					gimbalPitchCtrl.wantedAbsoluteAngle=-0.4;
+//				//gimbalPitchCtrl.wantedAbsoluteAngle += adjust_channel(pitch_channel, K_CTRL_PROP_Y, K_CTRL_EXP_Y) * PITCH_RC_SEN - adjust_channel(rc_p->mouse.y, K_CTRL_MOUSE_Y, K_CTRL_EXP_Y) * PITCH_MOUSE_SEN ;
+//				if(gimbalPitchCtrl.wantedAbsoluteAngle>=0.2)
+//					gimbalPitchCtrl.wantedAbsoluteAngle=0.2;
+//				if(gimbalPitchCtrl.wantedAbsoluteAngle<=-0.4)
+//					gimbalPitchCtrl.wantedAbsoluteAngle=-0.4;
 				
 				//yaw轴目标值控制
         gimbalYawCtrl.wantedAbsoluteAngle+=20*yaw_channel*YAW_RC_SEN+50*rc_p->mouse.x * YAW_MOUSE_SEN;
@@ -529,11 +530,12 @@ void getControlAngles(void)
 				gimbalPitchCtrl.wantedAbsoluteAngle=gimbalPitchCtrl.nowAbsoluteAngle;
 				gimbalYawCtrl.wantedAbsoluteAngle=gimbalYawCtrl.nowAbsoluteAngle;
 			  gimbalPitchCtrl.wantedAbsoluteAngle +=nuc_p->pitch.data;
-			  gimbalYawCtrl.wantedAbsoluteAngle +=nuc_p->yaw.data;
+			  gimbalYawCtrl.wantedAbsoluteAngle -=nuc_p->yaw.data;
+
 			}
 			else
 			{
-				is_auto=1;
+				is_auto=0;
 			}
     }
     
@@ -610,12 +612,7 @@ void limitAngles(struct gimbalMotorCtrl_s * c)
  */
 void limitAnglesSecond(void)
 {
-    
-    // if(radFormat(gimbalPitchCtrl.wantedAbsoluteAngle)>radFormat(ECD2Rad(gimbalPitchCtrl.maxECD)-ECD2Rad(gimbalPitchCtrl.nowECD)))
-    //     gimbalPitchCtrl.wantedAbsoluteAngle=radFormat(ECD2Rad(gimbalPitchCtrl.maxECD)-ECD2Rad(gimbalPitchCtrl.nowECD))-0.05f;
-    // if(radFormat(gimbalPitchCtrl.wantedAbsoluteAngle)<radFormat(ECD2Rad(gimbalPitchCtrl.minECD)-ECD2Rad(gimbalPitchCtrl.nowECD)))
-    //     gimbalPitchCtrl.wantedAbsoluteAngle=radFormat(ECD2Rad(gimbalPitchCtrl.minECD)-ECD2Rad(gimbalPitchCtrl.nowECD))+0.05f;
-    
+     
     if(gimbalPitchCtrl.wantedAbsoluteAngle>PITCH_TEST_RAD_MAX)
         gimbalPitchCtrl.wantedAbsoluteAngle=PITCH_TEST_RAD_MAX;
     if(gimbalPitchCtrl.wantedAbsoluteAngle<PITCH_TEST_RAD_MIN)
@@ -674,45 +671,32 @@ void gimbal_task(void const *pvParameters)
 		gimbalPitchCtrl.wantedAbsoluteAngle = gimbalPitchCtrl.nowAbsoluteAngle;
     while(1)
     {
-        // if(isnan(gimbalYawCtrl.agl_pid.out)||isnan(gimbalYawCtrl.spd_pid.out)
-            // ||isnan(gimbalPitchCtrl.spd_pid.out)||isnan(gimbalPitchCtrl.agl_pid.out))
-        // {
-        //     PID_clear(&(gimbalYawCtrl.spd_pid));
-        //     PID_clear(&(gimbalYawCtrl.agl_pid));
-        //     PID_clear(&(gimbalPitchCtrl.spd_pid));
-        //     PID_clear(&(gimbalPitchCtrl.agl_pid));
-        // }
-			 
+			  laser_on();
         for(i=0;i<2;i++)
             refreshAngleStates(gimbalCtrl[i]);   // 从传感器获得当前角度数据 //test done
         getControlAngles();                  // 从遥控器获得目标角度     //test half done
         for(i=0;i<2;i++)
         {
             monitorRounds(gimbalCtrl[i]);        // 监控转过的圈数           //test
-            //limitAngles(gimbalCtrl[i]);          // 限制目标角度，不超过pid范围pi/2，不超过总角度
         }
-        //limitAnglesSecond();    //上一个limit angle似乎没法控制当电机自己转过去时引发的角度变换。那直接把机器人当做在平地上，用ECD限制一次幅度
+				limitAnglesSecond();
         calcPID();              // 总是控制角度，双环，但测试时需要
-        CAN_cmd_gimbal(gimbalYawCtrl.giveVolt,gimbalPitchCtrl.giveVolt,*triggerCurrentP,0);       
-        //usart_printf("%f\r\n", gimbalYawCtrl.wantedAbsoluteAngle);
-				//CAN信号传递
-				//usart_printf("%f,%f\r\n",nuc_p->yaw.data,nuc_p->pitch.data);
+        CAN_cmd_gimbal(gimbalYawCtrl.giveVolt,-gimbalPitchCtrl.giveVolt,*triggerCurrentP,0);       
 				CAN1_send_yaw();
 				CAN1_send_channel();
-				//usart_printf("%d\r\n",gimbalCtrl[0]->nowECD);
-				//usart_printf("%f,%f\r\n",gimbalPitchCtrl.nowAbsoluteAngle,gimbalPitchCtrl.wantedAbsoluteAngle);
-				usart_printf("%f,%f\r\n",gimbalYawCtrl.nowAbsoluteAngle,gimbalYawCtrl.wantedAbsoluteAngle);
-				//usart_printf("%d\r\n",rc_channel_yaw);
-				//发包给nuc进行交互将获取的值存到句柄				
-				//建议赛前改
-				//usart_printf("%f\r\n",gimbalPitchCtrl.wantedAbsoluteAngle);
-				Encode(GimbalAngleMsg,get_refree_point()->robot_color,get_refree_point()->robot_color,0,0,gimbalYawCtrl.nowAbsoluteAngle
-				,gimbalPitchCtrl.nowAbsoluteAngle,get_refree_point()->shootspeed,is_auto);
-				HAL_UART_Transmit(&huart1, GimbalAngleMsg, 33, 100);
-				usart1_tx_dma_enable(GimbalAngleMsg, 33);
+			  //和上位机沟通，测试版，建议移动到别的位置
+//				usart_printf("%d\n",*gimbalPitchCtrl.ECDPoint);
+//				usart_printf("%f,%f,%f,%f,%f\r\n",gimbalYawCtrl.wantedAbsoluteAngle,gimbalYawCtrl.nowAbsoluteAngle,
+//				gimbalPitchCtrl.wantedAbsoluteAngle,gimbalPitchCtrl.nowAbsoluteAngle,get_INS_angle_point()[1]);
+//				Encode(GimbalAngleMsg,gimbalYawCtrl.nowAbsoluteAngle,gimbalPitchCtrl.nowAbsoluteAngle,get_INS_angle_point()[1],3,get_refree_point()->robot_color,1,is_auto);
+				Encode(GimbalAngleMsg,gimbalYawCtrl.nowAbsoluteAngle,gimbalPitchCtrl.nowAbsoluteAngle,get_INS_angle_point()[1],0,3,1,is_auto);
+				HAL_UART_Transmit(&huart1, GimbalAngleMsg, 34, 100);
+				usart1_tx_dma_enable(GimbalAngleMsg, 34);
+//				usart_printf("%d\n",is_auto);
+				//usb_printf("你好\r\n");
 				osDelay(GIMBAL_TASK_CTRL_TIME);
 				
-				
+
     }
 }
 const struct GimbalToChassis_s * getBadYawWantedSpd(void)

@@ -1,8 +1,8 @@
 standard_tpye_c\robot_total_mode.o: ..\SAS_Code\robot_total_mode.c
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\robot_total_mode.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\robot_total_mode.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\robot_total_mode.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\robot_total_mode.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\robot_total_mode.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -16,14 +16,14 @@ standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/i
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\robot_total_mode.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 standard_tpye_c\robot_total_mode.o: ..\SAS_Code\robot_total_mode.h
-standard_tpye_c\robot_total_mode.o: ..\application\remote_control.h
-standard_tpye_c\robot_total_mode.o: ..\application\struct_typedef.h
-standard_tpye_c\robot_total_mode.o: ..\bsp\boards\bsp_rc.h
-standard_tpye_c\robot_total_mode.o: ..\SAS_Code\NUC_communicate\nucCommu.h
-standard_tpye_c\robot_total_mode.o: ..\components\devices\OLED.h
-standard_tpye_c\robot_total_mode.o: ..\components\devices\oledfont.h
-standard_tpye_c\robot_total_mode.o: ..\bsp\boards\bsp_buzzer.h
-standard_tpye_c\robot_total_mode.o: ..\application\detect_task.h
+standard_tpye_c\robot_total_mode.o: ../application/remote_control.h
+standard_tpye_c\robot_total_mode.o: ../application/struct_typedef.h
+standard_tpye_c\robot_total_mode.o: ../bsp/boards/bsp_rc.h
+standard_tpye_c\robot_total_mode.o: ../SAS_Code/NUC_communicate/nucCommu.h
+standard_tpye_c\robot_total_mode.o: ../components/devices/OLED.h
+standard_tpye_c\robot_total_mode.o: ../components/devices/oledfont.h
+standard_tpye_c\robot_total_mode.o: ../bsp/boards/bsp_buzzer.h
+standard_tpye_c\robot_total_mode.o: ../application/detect_task.h
 standard_tpye_c\robot_total_mode.o: ..\SAS_Code\RobotStructure.h
 standard_tpye_c\robot_total_mode.o: ../Inc/main.h
 standard_tpye_c\robot_total_mode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h

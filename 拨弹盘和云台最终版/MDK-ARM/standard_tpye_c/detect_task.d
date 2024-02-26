@@ -3,8 +3,8 @@ standard_tpye_c\detect_task.o: ..\application\detect_task.h
 standard_tpye_c\detect_task.o: ..\application\struct_typedef.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\detect_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\detect_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\detect_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\detect_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\detect_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -17,4 +17,4 @@ standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/includ
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\detect_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-standard_tpye_c\detect_task.o: ..\SAS_Code\NUC_communicate\nucCommu.h
+standard_tpye_c\detect_task.o: ../SAS_Code/NUC_communicate/nucCommu.h

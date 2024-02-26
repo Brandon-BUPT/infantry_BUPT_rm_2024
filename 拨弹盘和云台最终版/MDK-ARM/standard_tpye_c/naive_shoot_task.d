@@ -1,8 +1,8 @@
 standard_tpye_c\naive_shoot_task.o: ..\SAS_Code\naive_shoot_task.c
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\naive_shoot_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-standard_tpye_c\naive_shoot_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+standard_tpye_c\naive_shoot_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\naive_shoot_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\naive_shoot_task.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -15,11 +15,11 @@ standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/i
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\naive_shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-standard_tpye_c\naive_shoot_task.o: ..\components\controller\pid.h
-standard_tpye_c\naive_shoot_task.o: ..\application\struct_typedef.h
-standard_tpye_c\naive_shoot_task.o: ..\application\remote_control.h
-standard_tpye_c\naive_shoot_task.o: ..\bsp\boards\bsp_rc.h
-standard_tpye_c\naive_shoot_task.o: ..\SAS_Code\NUC_communicate\nucCommu.h
+standard_tpye_c\naive_shoot_task.o: ../components/controller/pid.h
+standard_tpye_c\naive_shoot_task.o: ../application/struct_typedef.h
+standard_tpye_c\naive_shoot_task.o: ../application/remote_control.h
+standard_tpye_c\naive_shoot_task.o: ../bsp/boards/bsp_rc.h
+standard_tpye_c\naive_shoot_task.o: ../SAS_Code/NUC_communicate/nucCommu.h
 standard_tpye_c\naive_shoot_task.o: ..\SAS_Code\robot_total_mode.h
 standard_tpye_c\naive_shoot_task.o: ..\SAS_Code\CAN_receive.h
 standard_tpye_c\naive_shoot_task.o: ../Inc/main.h
@@ -65,6 +65,6 @@ standard_tpye_c\naive_shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4x
 standard_tpye_c\naive_shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
 standard_tpye_c\naive_shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 standard_tpye_c\naive_shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
-standard_tpye_c\naive_shoot_task.o: ..\application\detect_task.h
-standard_tpye_c\naive_shoot_task.o: ..\components\devices\OLED.h
-standard_tpye_c\naive_shoot_task.o: ..\components\devices\oledfont.h
+standard_tpye_c\naive_shoot_task.o: ../application/detect_task.h
+standard_tpye_c\naive_shoot_task.o: ../components/devices/OLED.h
+standard_tpye_c\naive_shoot_task.o: ../components/devices/oledfont.h

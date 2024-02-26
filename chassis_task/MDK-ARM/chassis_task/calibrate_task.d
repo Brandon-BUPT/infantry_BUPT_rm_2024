@@ -1,11 +1,11 @@
 chassis_task\calibrate_task.o: ..\application\calibrate_task.c
 chassis_task\calibrate_task.o: ..\application\calibrate_task.h
 chassis_task\calibrate_task.o: ..\application\struct_typedef.h
-chassis_task\calibrate_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\string.h
+chassis_task\calibrate_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\string.h
 chassis_task\calibrate_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis_task\calibrate_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis_task\calibrate_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-chassis_task\calibrate_task.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+chassis_task\calibrate_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+chassis_task\calibrate_task.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 chassis_task\calibrate_task.o: ../Inc/FreeRTOSConfig.h
 chassis_task\calibrate_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis_task\calibrate_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

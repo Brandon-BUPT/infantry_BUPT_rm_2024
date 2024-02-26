@@ -143,7 +143,14 @@ void robot_total_mode_task(void const *pvParameters)
             robotState=RobotState_e_BadYawCar;
             keyBoardAndMouseHasChanged=1;
         }
-       
+				 if(rc_p->mouse.press_r||rc_p->rc.ch[4]>500)
+				{
+					robotAuto=1;
+				}
+				else
+				{
+					robotAuto=0;
+				}
         //***********************************************************//
 
 

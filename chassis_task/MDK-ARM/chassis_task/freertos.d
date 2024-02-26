@@ -1,7 +1,7 @@
 chassis_task\freertos.o: ../Src/freertos.c
 chassis_task\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis_task\freertos.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stddef.h
-chassis_task\freertos.o: D:\Develop\Keil V5\ARM\ARMCC\Bin\..\include\stdint.h
+chassis_task\freertos.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stddef.h
+chassis_task\freertos.o: D:\Develop\Keil5\keil_v5_core\ARM\ARMCC\Bin\..\include\stdint.h
 chassis_task\freertos.o: ../Inc/FreeRTOSConfig.h
 chassis_task\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis_task\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

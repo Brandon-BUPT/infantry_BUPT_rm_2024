@@ -172,19 +172,19 @@ void MX_FREERTOS_Init(void) {
     led_RGB_flow_handle = osThreadCreate(osThread(led), NULL);
 
 
-    osThreadDef(OLED, oled_task, osPriorityLow, 0, 512);
-    oled_handle = osThreadCreate(osThread(OLED), NULL);
+//    osThreadDef(OLED, oled_task, osPriorityLow, 0, 512);
+//    oled_handle = osThreadCreate(osThread(OLED), NULL);
 
 
-    osThreadDef(REFEREE, referee_usart_task, osPriorityNormal, 0, 128);
-    referee_usart_task_handle = osThreadCreate(osThread(REFEREE), NULL);
+//    osThreadDef(REFEREE, referee_usart_task, osPriorityNormal, 0, 128);
+//    referee_usart_task_handle = osThreadCreate(osThread(REFEREE), NULL);
 
 
-    // osThreadDef(USBTask, usb_task, osPriorityNormal, 0, 256);
-    // usb_task_handle = osThreadCreate(osThread(USBTask), NULL);
+//    osThreadDef(USBTask, usb_task, osPriorityNormal, 0, 256);
+//    usb_task_handle = osThreadCreate(osThread(USBTask), NULL);
 
-    osThreadDef(BATTERY_VOLTAGE, battery_voltage_task, osPriorityNormal, 0, 128);
-    battery_voltage_handle = osThreadCreate(osThread(BATTERY_VOLTAGE), NULL);
+//    osThreadDef(BATTERY_VOLTAGE, battery_voltage_task, osPriorityNormal, 0, 128);
+//    battery_voltage_handle = osThreadCreate(osThread(BATTERY_VOLTAGE), NULL);
 
     osThreadDef(SERVO, servo_task, osPriorityNormal, 0, 128);
     servo_task_handle = osThreadCreate(osThread(SERVO), NULL);
